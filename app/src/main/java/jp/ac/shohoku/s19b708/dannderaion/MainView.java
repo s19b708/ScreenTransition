@@ -16,6 +16,8 @@ import android.view.View;
 public class MainView extends View{
     public final int FIRST = 1; //状態を表す定数 1
     public final int SECOND = 2; //状態を表す定数 2
+    public final int THIRD = 3; //状態を表す定数 3
+    public final int FOURTH = 4; //状態を表す定数 4
 
     int state; //状態を表す変数
 
@@ -36,11 +38,39 @@ public class MainView extends View{
         if(state == FIRST) { //状態 1 の場合の描画
             p.setColor(Color.BLUE);
             canvas.drawARGB(255, 255, 255, 255);
-            canvas.drawRect(100, 100, 300, 200, p);
+            canvas.drawRect(100, 100, 200, 300, p);
+
         } else if (state == SECOND){ //状態 2 の場合の描画
             p.setColor(Color.RED);
             canvas.drawARGB(255, 255, 255, 0);
-            canvas.drawRect(100, 100, 300, 200, p);
+            canvas.drawRect(100, 100, 200, 300, p);
+
+        } else { //それ以外の場合は，Log にエラーを吐き出す
+            Log.d("error", "never come here");
+        }
+
+        if(state == FIRST) { //状態 1 の場合の描画
+                p.setColor(Color.BLUE);
+                canvas.drawRect(300, 100, 400, 300, p);
+
+        } else if (state == THIRD){ //状態 3 の場合の描画
+            p.setColor(Color.BLACK);
+            canvas.drawARGB(255, 0, 255, 0);
+            canvas.drawRect(300, 100, 400, 300, p);
+
+        } else { //それ以外の場合は，Log にエラーを吐き出す
+            Log.d("error", "never come here");
+        }
+
+        if(state == FIRST) { //状態 1 の場合の描画
+            p.setColor(Color.BLUE);
+            canvas.drawRect(600, 100, 700, 300, p);
+
+        } else if (state == FOURTH){ //状態 4 の場合の描画
+            p.setColor(Color.CYAN);
+            canvas.drawARGB(255, 255, 0, 0);
+            canvas.drawRect(600, 100, 700, 300, p);
+
         } else { //それ以外の場合は，Log にエラーを吐き出す
             Log.d("error", "never come here");
         }
@@ -52,10 +82,32 @@ public class MainView extends View{
         int y = (int) event.getY();
 
         //長方形の内部で
-        if(x>100 && x < 300 && y>100 && y<200) {
+        if(x>100 && x < 200 && y>100 && y<300) {
             if(state == FIRST){ //状態１だったら状態２へ
                 state = SECOND;
-            } else if (state == SECOND){ //状態 2 だったら状態 1 へ
+            } else if (state == SECOND){ //状態 ２ だったら状態 １ へ
+                state = FIRST;
+            } else { //それ以外だったらエラーを吐き出す
+                Log.d("error", "never come here");
+            }
+        }
+
+        //長方形の内部で
+        if(x>300 && x < 400 && y>100 && y<300) {
+            if(state == FIRST){ //状態１だったら状態３へ
+                state = THIRD;
+            } else if (state == THIRD){ //状態 ３ だったら状態 １ へ
+                state = FIRST;
+            } else { //それ以外だったらエラーを吐き出す
+                Log.d("error", "never come here");
+            }
+        }
+
+        //長方形の内部で
+        if(x>600 && x < 700 && y>100 && y<300) {
+            if(state == FIRST){ //状態１だったら状態４へ
+                state = FOURTH;
+            } else if (state == FOURTH){ //状態 ４ だったら状態 １ へ
                 state = FIRST;
             } else { //それ以外だったらエラーを吐き出す
                 Log.d("error", "never come here");
